@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>@ViewBag.Title - Meu Aplicativo ASP.NET</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <style>
+        body {
+            padding: 0px;
+            margin: 0px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            min-height: 7vh;
+            background-color: #8B2323;
+        }
+
+        .logo {
+            color: #FFF;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-size: 20px;
+            box-sizing: border-box;
+        }
+
+        h3 {
+            margin: 0;
+            padding: 0;
+            font-weight: bold;
+        }
+
+        .navLinks {
+            display: flex;
+            justify-content: space-around;
+            width: 35%;
+            margin: 0;
+            padding: 0;
+        }
+
+            .navLinks li {
+                list-style: none;
+            }
+
+            .navLinks a {
+                color: #FFF;
+                text-decoration: none;
+                letter-spacing: 2px;
+                font-weight: bold;
+                font-size: 14px;
+            }
+    </style>
+
+</head>
+<body>
+
+    <header id="headerId" hidden>
+        <nav>
+            <div class="logo">
+                <h3> Consorcioflix</h3>
+            </div>
+            <ul class="navLinks">
+                <li>
+                    <a href="#">@Html.ActionLink("Inicio", "Index", "Filme")</a>
+                </li>
+                <li>
+                    <a href="#">Informações</a>
+                </li>
+                <li>
+                    <a href="#">@Html.ActionLink("Sair", "Index", "Home")</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    @RenderBody()
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

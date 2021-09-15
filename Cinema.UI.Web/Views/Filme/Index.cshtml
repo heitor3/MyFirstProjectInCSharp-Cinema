@@ -1,0 +1,232 @@
+﻿@model IEnumerable<Cinema.Dominio.Tbl_FILMES>
+
+@{
+    ViewBag.Title = "Lista de Filmes";
+}
+
+
+<style>
+
+    body {
+        margin: 0;
+        padding: 0
+    }
+
+    .titlePage h1 {
+        font-weight: bold;
+        color: #FFF;
+        font-size: 30px;
+        margin-bottom: 30px;
+    }
+
+    .container {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        background-image: url("../../Assets/movie.jpg");
+    }
+
+    .background {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        background: rgb(10 10 10 / 0.78);
+    }
+
+    .filmeSection {
+        max-width: 940px;
+        justify-content: center;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        grid-gap: 15px;
+        padding: 0px;
+    }
+
+    .titleFilme {
+        display: flex;
+        height: 60px;
+        align-items: center;
+        justify-content: center;
+        padding: 5px;
+        background-color: #8B2323;
+    }
+
+        .titleFilme p {
+            margin: 0;
+            padding: 0;
+            font-size: 20px;
+            font-weight: bold;
+            color: #FFF;
+        }
+
+    .imgBanner {
+        width: 100%;
+        height: 380px;
+        position: relative;
+    }
+
+    .detailFilme {
+        width: auto;
+        height: 28px;
+        font-size: 20px;
+        text-align: center;
+    }
+
+        .detailFilme a {
+            display: flex;
+            color: #FFF;
+            justify-content: center;
+            text-decoration: none;
+            background-color: #8B2323;
+            transition: 0.2s;
+        }
+
+            .detailFilme a:hover {
+                background-color: #f31111;
+            }
+
+    .btnComprar {
+        width: auto;
+        height: 28px;
+        font-size: 20px;
+        text-align: center;
+    }
+
+        .btnComprar a {
+            display: flex;
+            color: #FFF;
+            justify-content: center;
+            text-decoration: none;
+            background-color: #008B00;
+            transition: 0.2s;
+        }
+
+            .btnComprar a:hover {
+                background-color: #38f613;
+            }
+</style>
+
+
+<div class="container">
+
+    <div class="background">
+
+        <div class="titlePage">
+            <h1>Filmes em cartaz</h1>
+        </div>
+        <main class="filmeSection">
+
+            @foreach (var item in Model)
+            {
+                <div class="filmeCard">
+                    <!-- <div class="banner"> -->
+                    <div class="titleFilme">
+                        <p>@Html.DisplayFor(modelItem => item.Nome)</p>
+                    </div>
+                    <img class="imgBanner" src="https://images.pexels.com/photos/7234241/pexels-photo-7234241.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
+                         alt="Cartaz do filme">
+                    <!-- </div> -->
+                    <div class="detailFilme">
+                        <a href="#">@Html.ActionLink("Detalhes", "Detalhes", new { id = item.Id })</a>
+                    </div>
+                    <div class="btnComprar">
+                        <a href="#">
+                            @Html.ActionLink("Comprar ingresso", "Index", "Sessao", new { id = item.Id }, null)
+                        </a>
+                    </div>
+                </div>
+            }
+
+        </main>
+
+    </div>
+</div>
+
+
+
+
+<script>
+    window.addEventListener('load',
+        function () {
+            this.document.getElementById("headerId").removeAttribute("hidden", "");
+        });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*=====================================================================================================*@
+
+
+@*
+
+    <h2>Filmes</h2>
+
+    <p>
+        @Html.ActionLink("Novo Filme", "Cadastrar")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id_classificacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Duracao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descricao)
+            </th>
+            <th></th>
+        </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tbl_CLASSIFICACAO.Classificacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Duracao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descricao)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Editar", new { id=item.Id }) |
+                @Html.ActionLink("Detalhes", "Detalhes", new { id=item.Id }) |
+                @Html.ActionLink("Excluir", "Excluir", new { id=item.Id })
+            </td>
+        </tr>
+    }
+
+    </table>
+
+*@

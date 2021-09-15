@@ -1,0 +1,121 @@
+﻿@model Cinema.Dominio.Tbl_CLIENTES
+@{
+    ViewBag.Title = "Pagina Inicial";
+
+}
+
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
+
+<style>
+
+    body {
+        background-image: url("../../Assets/movie.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        /*        background-attachment: fixed;
+        width: 100%;
+        height: auto;*/
+    }
+
+    .all {
+        width: auto;
+        height: 350px;
+        transform: translate(-50%, -47%);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        overflow: auto;
+    }
+
+    .login {
+        background: rgba(245, 245, 255, 0.89);
+        padding: 5px;
+        border-radius: 16px;
+        box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.226);
+        width: 350px;
+        height: auto;
+        margin-top: 10%;
+        display: inline-grid;
+        color: black;
+    }
+
+    .registro {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 10%;
+    }
+
+        .registro a {
+            color: rgb(43, 96, 243);
+        }
+
+
+    .mainlogin {
+        text-align: center;
+        padding: 10px;
+    }
+
+
+    .butn {
+        border: 2px solid black;
+        border-radius: 16px;
+        background-color: rgba(255, 255, 255, 0);
+        padding: 5px;
+        cursor: pointer;
+        outline: none;
+    }
+
+    .btnlogin {
+        width: 155px;
+        border-color: #8B2323;
+        color: #8B2323;
+        transition: all 500ms ease;
+    }
+
+        .btnlogin:hover {
+            background-color: #8B2323;
+            color: white;
+            -webkit-transition: all 500ms ease;
+            -moz-transition: all 500ms ease;
+            -o-transition: all 500ms ease;
+            transition: all 500ms ease;
+        }
+
+
+    .inputInfo {
+        border: none;
+        border-bottom: 1px solid #8B2323;
+        background-color: rgba(255, 255, 255, 0);
+        outline: none;
+        width: 180px;
+        text-align: center;
+        color: black;
+    }
+</style>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <main class="all" onload="hideBar()">
+        <section class='login'>
+            <div class='mainlogin'>
+                <h1>Consorcioflix</h1><br>
+                <form class="lreg" name="form" runat="server">
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "inputInfo", type = "email", placeholder = "Email" } })<br><br>
+
+                    @Html.EditorFor(model => model.Senha, new { htmlAttributes = new { @class = "inputInfo", type = "password", placeholder = "Senha" } })<br><br>
+
+                    <input type="submit" class="butn btnlogin" id="BotaoL" value="Entrar"><br><br>
+
+                    <div class="registro"><a href="#">Esqueceu a senha?</a><b>@Html.ActionLink("Cadastrese!", "Cadastrar", "Home")</b></div>
+
+                </form>
+            </div>
+        </section>
+
+
+    </main>
+}

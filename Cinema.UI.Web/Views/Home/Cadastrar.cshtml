@@ -1,0 +1,211 @@
+﻿@model Cinema.Dominio.Tbl_CLIENTES
+
+@{
+    ViewBag.Title = "Cadastrar";
+}
+
+<style>
+
+    .container {
+        display: flex;
+        background-color: black;
+        justify-content: center;
+        width: 100%;
+        height: 660px;
+        margin: 0;
+        background-image: url(https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=750&q=80);
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    .content-form {
+        background: rgb(10, 10, 10, 0.78);
+        height: 100%;
+        width: 400px;
+        display: flex;
+        padding: 10px;
+        flex-direction: column;
+        padding-top: 20px;
+        /* justify-content: center; */
+    }
+
+    .field {
+        margin: 10px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .nameLabel {
+        color: #FFF;
+        font-size: 18px;
+        font-weight: normal;
+    }
+
+    .inputForm {
+        padding: 6px;
+        display: block;
+        border: none;
+        width: 100%;
+        line-height: 18px;
+        border-bottom-style: inset;
+        outline: none;
+    }
+
+
+    .content-buttons {
+        display: flex;
+        margin-top: 30px;
+        height: auto;
+        width: 100%;
+        padding: 10px 20px;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+        .content-buttons button {
+            padding: 0px;
+            outline: none;
+            border: none;
+        }
+
+    .btn {
+        width: 150px;
+        border: none;
+        padding: 10px;
+        outline: none;
+        color: #FFF;
+        background-color: #438e31;
+        transition: 0.2s;
+    }
+
+
+        .btn:hover {
+            background-color: #38f613;
+            color: #FFF;
+        }
+
+    .back {
+        background-color: #901e1e;
+        color: #FFF;
+    }
+
+        .back:hover {
+            background-color: #f31111;
+        }
+
+        .back a {
+            text-decoration-line: none;
+            color: #FFF;
+        }
+</style>
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+    <section class="container">
+
+        <main class="content-form">
+
+            <p style="color:red;">* Todos os campos devem ser preenchidos</p>
+
+            <div class="field">
+                @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "nameLabel" })
+                <div>
+                    @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "inputForm" } })
+                </div>
+            </div>
+
+            <div class="field">
+
+                @Html.LabelFor(model => model.Cpf, htmlAttributes: new { @class = "nameLabel" })
+                <div>
+                    @Html.EditorFor(model => model.Cpf, new { htmlAttributes = new { @class = "inputForm" } })
+
+                </div>
+            </div>
+
+            <div class="field">
+                @Html.LabelFor(model => model.Nascimento, htmlAttributes: new { @class = "nameLabel" })
+                <div>
+                    @Html.EditorFor(model => model.Nascimento, new { htmlAttributes = new { @class = "inputForm" } })
+                </div>
+            </div>
+
+            <div class="field">
+                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "nameLabel" })
+                <div>
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "inputForm" } })
+                </div>
+            </div>
+
+            <div class="field">
+                @Html.LabelFor(model => model.Senha, htmlAttributes: new { @class = "nameLabel" })
+                <div>
+                    @Html.EditorFor(model => model.Senha, new { htmlAttributes = new { @class = "inputForm" } })
+                </div>
+            </div>
+
+
+            <div class="field">
+                @Html.LabelFor(model => model.ConfirmaSenha, htmlAttributes: new { @class = "nameLabel" })
+                <div>
+                    @Html.EditorFor(model => model.ConfirmaSenha, new { htmlAttributes = new { @class = "inputForm" } })
+                </div>
+                @Html.ValidationMessageFor(model => model.ConfirmaSenha, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="content-buttons">
+
+                <button class="btn" type="submit" onclick="cadastro()">
+                    Concluir
+                </button>
+                <div class="btn back">
+                    <a href="#"> @Html.ActionLink("Cancelar cadastro", "Index", "Home")</a>
+                </div>
+            </div>
+
+
+        </main>
+    </section>
+
+}
+
+<script>
+
+
+    function cadastro() {
+        let input = document.querySelectorAll('[aria-invalid="false"]')
+
+        console.log(input.length);
+
+        if (input.length < 6) {
+            alert("Certifique-se de que todos os campos estejam preenchidos!");
+        }
+        else {
+            alert("Cadastrado finalizado");
+        }
+
+    }
+</script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+
+
+
+
+
+
+
+

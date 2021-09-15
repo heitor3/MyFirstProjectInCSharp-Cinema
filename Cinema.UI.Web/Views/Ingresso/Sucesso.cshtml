@@ -1,0 +1,140 @@
+﻿@model Cinema.Dominio.Tbl_INGRESSO
+
+<style>
+
+    body {
+        margin: 0;
+        padding: 0
+    }
+
+    .container {
+        width: 100%;
+        height: 100vh;
+        padding: 0;
+        margin: 0;
+        background-image: url("../../Assets/movie.jpg");
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+        .container h1 {
+            font-weight: bold;
+            color: #FFF;
+            font-size: 30px;
+            margin-bottom: 60px;
+        }
+
+    .mainInfo {
+        background: rgba(245, 245, 255, 0.89);
+        padding: 20px;
+        border-radius: 16px;
+        box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.226);
+        width: 600px;
+        height: auto;
+        display: inline-grid;
+        color: black;
+    }
+
+        .mainInfo h1 {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #000;
+            margin: 0;
+            padding: 0;
+        }
+
+    .detalhes {
+        margin-top: 50px;
+        justify-content:center;
+    }
+    .detalhes p {
+        font-size: 16px;
+        color: #FFF;
+        font-weight: bold;
+    }
+
+</style>
+
+<section class="container">
+    <h1>Compra finalizada</h1>
+    <main class="mainInfo">
+        <h1>INGRESSO</h1>
+        <table class="table">
+            <tr>
+                <td>Filme: @Html.DisplayFor(model => model.Tbl_FILMES.Nome)</td>
+            </tr>
+            <tr>
+                <td>Sessão: @Html.DisplayFor(model => model.Tbl_SESSAO.Horario)</td>
+                <td>
+                    Assento:
+                    @Html.DisplayFor(model => model.Tbl_ASSENTO.Corredor)
+                    @Html.DisplayFor(model => model.Tbl_ASSENTO.Fileira)
+                </td>
+            </tr>
+            <tr>
+                <td>Data: @Html.DisplayFor(model => model.Tbl_SESSAO.Data)</td>
+            </tr>
+            <tr>
+                <td>Sala: @Html.DisplayFor(model => model.Tbl_SESSAO.Id_sala)</td>
+                <td>Entrada: @Html.DisplayFor(model => model.Tbl_TIPO_INGRESSO.Tipo_ingresso)</td>
+            </tr>
+
+        </table>
+    </main>
+
+    <div class="detalhes">
+        <p>
+            Prezado(a) senhor(a) @Html.DisplayFor(model => model.Tbl_CLIENTES.Nome),
+            a retirada do ingresso pode ser feita no guichê ao lado do cinama.
+        </p>
+        <p> Nós da ConsorcioFlix agradecemos a preferência.</p>
+    </div>
+
+
+</section>
+
+
+
+<script>
+    window.addEventListener('load',
+        function () {
+            this.document.getElementById("headerId").removeAttribute("hidden", "");
+        });
+</script>
+
+
+@*
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayFor(model => model.Tbl_FILMES.Nome)
+            </th>
+            <th>
+                @Html.DisplayFor(model => model.Tbl_SESSAO.Horario)
+                @Html.DisplayFor(model => model.Tbl_SESSAO.Id_sala)
+                @Html.DisplayFor(model => model.Tbl_SESSAO.Data)
+            </th>
+            <th>
+                @Html.DisplayFor(model => model.Tbl_CLIENTES.Nome)
+            </th>
+            <th>
+                @Html.DisplayFor(model => model.Tbl_ASSENTO.Corredor)
+                @Html.DisplayFor(model => model.Tbl_ASSENTO.Fileira)
+            </th>
+            <th>
+                @Html.DisplayFor(model => model.Tbl_TIPO_INGRESSO.Tipo_ingresso)
+            </th>
+            <th>
+                @Html.DisplayFor(model => model.DataCompra)
+            </th>
+            <th></th>
+        </tr>
+
+
+    </table>
+
+
+*@

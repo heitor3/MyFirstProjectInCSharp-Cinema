@@ -1,0 +1,339 @@
+﻿@model IEnumerable<Cinema.Dominio.Tbl_SESSAO>
+
+
+
+<style>
+    .container {
+        display: flex;
+        background-color: black;
+        align-items: center;
+        flex: 1;
+        flex-direction: column;
+        width: 100%;
+        height: 660px;
+        margin: 0;
+        padding: 0;
+        background-image: url(https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=750&q=80);
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    .content {
+        margin-top: 30px;
+        display: flex;
+        flex-direction: row;
+    }
+
+    h1 {
+        font-size: 30px;
+        color: #FFF;
+        font-weight: bold;
+        text-align: center;
+        margin: 25px;
+        padding: 0;
+    }
+
+    .containerSelect {
+        display: flex;
+        flex-direction: column;
+        width: 40%;
+        height: 100%
+    }
+
+        .containerSelect p {
+            color: #FFF;
+            font-size: 20px;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+    .selectContent {
+        display: flex;
+        flex-direction: row;
+        margin: 15px 0;
+        padding: 0;
+        align-items: center;
+        text-align: center;
+        justify-content: space-between;
+        width: 200px;
+    }
+
+        .selectContent p {
+            margin: 0 10px;
+            color: #FFF;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+    /*    .assentoContent {
+        width: 60%;
+        height: 100%;
+
+    }*/
+
+    .assentoContent p {
+        color: #FFF;
+        font-size: 20px;
+        margin-top: 10px;
+        text-align: center;
+    }
+
+    .containerAssento {
+        margin: 20px;
+        display: grid;
+        grid-gap: 5px;
+        grid-template-columns: repeat(10, 1fr);
+    }
+
+    .assentoDiv {
+        height: 50px;
+        width: 50px;
+        background: #FFF;
+        color: black;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .btn-assento {
+        background-color: #8B2323;
+        color: #fff;
+    }
+
+    .valroes {
+        padding: 0 10px;
+        margin: 0;
+    }
+
+    .valroes p {
+        font-size: 12px;
+        display: flex
+    }
+
+    .btnConfirma button {
+        padding: 10px;
+        border: none;
+        outline: none;
+    }
+
+    .btn {
+        width: 185px;
+        margin: 15px;
+        color: #FFF;
+        background-color: #438e31;
+        transition: 0.2s;
+    }
+
+
+        .btn:hover {
+            background-color: #38f613;
+            color: #FFF;
+        }
+
+    .enable {
+        background-color: #808080;
+        color: #000;
+    }
+</style>
+
+
+
+
+<section class="container">
+
+    <h1>Comprar Ingresso</h1>
+    <div class="content">
+
+        <div class="assentoContent">
+            <p>Selecione seu assento</p>
+
+            <div class="containerAssento">
+
+                @foreach (var item in Model)
+                {
+                    foreach (Cinema.Dominio.Tbl_ASSENTO assento in item.Tbl_SALAS.Tbl_ASSENTO)
+                    {
+
+                        <button type="button"
+                                class="assentoDiv"
+                                id="@Html.DisplayFor(modelItem => assento.Id_assento)">
+
+                            @Html.DisplayFor(modelItem => assento.Corredor)
+                            @Html.DisplayFor(modelItem => assento.Fileira)
+                        </button>
+
+                    }
+                    break;
+
+                }
+
+            </div>
+
+        </div>
+
+        <div class="containerSelect">
+            <p>Selecione a data e horário</p>
+
+            <div class="selectContent">
+                <p>Data: </p>
+                <select id="selectData">
+                    <option value="" disabled selected hidden>Selecione</option>
+                    @foreach (var item in Model)
+                    {
+                        <option>
+                            @Html.DisplayFor(modelItem => item.Data)
+                        </option>
+                    }
+                </select>
+            </div>
+
+            <div class="selectContent">
+                <p>Sessão: </p>
+                <select id="selectHora">
+                    <option value="" disabled selected hidden>Selecione</option>
+                    @foreach (var item in Model)
+                    {
+                        <option>
+                            @Html.DisplayFor(modelItem => item.Horario)
+                        </option>
+                    }
+                </select>
+            </div>
+
+            <div class="selectContent">
+                <p>Entrada: </p>
+                <select id="selectEntrada">
+                    <option value="" disabled selected hidden>Selecione</option>
+                    <option value="1">Meia</option>
+                    <option value="2">Inteira</option>
+
+                </select>
+            </div>
+
+            <div class="valroes">
+                <p>Inteira: 15,00</p>
+                <p>Meia: 07,50</p>
+            </div>
+
+            <div class="btnConfirma">
+
+                <button id="comprarIngresso" class="btn" type="submit">
+                    Concluir
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+</section>
+
+
+
+@*<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>*@
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+<script>
+    window.addEventListener('load',
+        function () {
+            this.document.getElementById("headerId").removeAttribute("hidden", "");
+        });
+
+    $(document).ready(function () {
+        $(".assentoDiv").click(function () {
+            $(".assentoDiv")
+                .removeClass("btn-assento");
+            $(this)
+                .addClass("btn-assento");
+        });
+    });
+
+    window.addEventListener('change',
+        function () {
+
+            $(".assentoDiv").removeClass("enable");
+            $(".assentoDiv").attr("disabled", false);
+
+            var dt = $('#selectData').val()
+            var hr = $('#selectHora').val()
+
+            if (dt != null && hr != null) {
+
+                var url = "/Sessao/Verificar";
+                var json = {
+                    data: dt,
+                    hora: hr
+                }
+
+                $.get(url, json, function (id) {
+
+                    var data = {
+                        id: id
+                    };
+
+                    var path = "/Ingresso/Verificar";
+
+                    $.get(path, data, function (resultado) {
+
+                        var array = JSON.parse(resultado)
+                        var assento = document.querySelectorAll('.assentoDiv');
+
+                        if (array.length > 0) {
+                            $.each(array, function (key, value) {
+
+                                for (var i = 0; i < assento.length; i++) {
+                                    if (value == assento[i].id) {
+
+                                        $("#" + assento[i].id).addClass("enable");
+                                        $("#" + assento[i].id).attr("disabled", true);
+                                    }
+                                }
+                            })
+                        }
+                    });
+                });
+            }
+        }
+    )
+
+    $("#comprarIngresso").click(function () {
+        try {
+
+            var data = $('#selectData').val()
+
+            var hora = $('#selectHora').val()
+
+            var entrada = $('#selectEntrada').val()
+
+            var assentoId = document.querySelector('.btn-assento').id
+
+            if (data == null || hora == null || entrada == null || assentoId == null) {
+                alert("Selecione todos os campos!\n Verifique novamente")
+            }
+            else {
+                var url = "/Ingresso/Index";
+                var json = {
+
+                    id_tipo_ingresso: entrada,
+                    id_assento: assentoId,
+                }
+
+                $.post(url, json, function (data) {
+
+                    window.location.href = "/Ingresso/Sucesso/" + data
+                })
+            }
+
+        } catch (e) {
+            alert("Selecione todos os campos!\n Verifique novamente")
+        }
+
+    })
+
+
+
+</script>
